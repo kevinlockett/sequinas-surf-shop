@@ -11,86 +11,69 @@ const inventory = [
     { id: 10, description: "Surfboard repair kit", price: 19.99, type: "gear" }
 ]
 
-const upperCaseInventory = []
+const isSurfboard = (inventoryItem) => {
+    if (inventoryItem.type === "surfboard") {
+        returnValue = true
+    }
+    else returnValue = false
+    return returnValue
+}
 
 const isBargain = (inventoryItem) => {
-    let returnValue = false
-
     if (inventoryItem.price < 50.00) {
         returnValue = true
     }
-
+    else returnValue = false
     return returnValue
 }
 
-const isClothing = (item) => {
-    let returnValue = false
-
-    if (item.type === "clothing") {
+const isClothing = (inventoryItem) => {
+        if (inventoryItem.type === "clothing") {
         returnValue = true
     }
-
+    else returnValue = false
     return returnValue
 }
 
-const isSurfboard = (item) => {
-    let returnValue = false
-
-    if (item.type === "surfboard") {
+const isGear = (inventoryItem) => {
+    if (inventoryItem.type === "surfboard") {
         returnValue = true
     }
-
+    else returnValue = false
     return returnValue
 }
 
-const isGear = (gear) => {
-    let returnValue = false
-
-    if (gear.type === "gear") {
-        returnValue = true
-    }
-
-    return returnValue
+const printMessage = (message) => {
+    if (message != "") {
+        console.log(message)
+    } 
 }
 
 const convertDataForAccounting = (product) => {
-    const upperDescription = product.description.toUpperCase()
-    const upperType = product.type.toUpperCase()
-    const itemForAccounting = {id: product.id, description: upperDescription, price: product.price, type: upperType}
-    upperCaseInventory.push(itemForAccounting)
+    const allUpperCase = `${product.description.toUpperCase()} - ${product.type.toUpperCase()} - ${product.price}`
+    return allUpperCase
 }
 
-for (let surfProduct of inventory) {
-    let message = ""
-
-    if (isClothing(surfProduct)) {
-        message = `${surfProduct.description} is a clothing product`
+for (const inventoryItem of inventory) {
+    if (isClothing(inventoryItem)) {
+        message = `${inventoryItem.description} is a clothing product`
     }
-
-    if (isGear(surfProduct)) {
-        message = `${surfProduct.description} is a surfing gear product`
+    else if (isBargain(inventoryItem)) {
+        message = `${inventoryItem.description} is currently on sale`
     }
-
-
-    if (isSurfboard(surfProduct)) {
-        message = `${surfProduct.description} is a surfboard`
+    else if (isSurfboard(inventoryItem)) {
+        message = `${inventoryItem.description} is a surfboard`
     }
-
-    if (isBargain(surfProduct)) {
-        message = `${surfProduct.description} is currently on sale`
+    else if (isGear(inventoryItem)) {
+        message = `${inventoryItem.description} is a surfing gear product`
     }
-
-    if (message !== "") {
-        console.log(message)
-    }
+    else message = ""
+    printMessage(message)
 }
 
 console.log("\n------------------------\n")
 
-for (const inventoryItem of inventory) {
-    convertDataForAccounting(inventoryItem)
-}
-
-for (const inventoryItem of upperCaseInventory) {
-    console.log(`${inventoryItem.description} - ${inventoryItem.type} - ${inventoryItem.price}`)
+for (const product of inventory) {
+    const modifiedData = convertDataForAccounting(product)
+    console.log(modifiedData)
 }
