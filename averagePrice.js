@@ -1,56 +1,10 @@
 const { inventory } = require("./data.js")
 
-const isSurfboard = (inventoryItem) => {
-    if (inventoryItem.type === "surfboard") {
-        returnValue = true
-    }
-    else returnValue = false
-    return returnValue
-}
-
-const isBargain = (inventoryItem) => {
-    if (inventoryItem.price < 50.00) {
-        returnValue = true
-    }
-    else returnValue = false
-    return returnValue
-}
-
-const isClothing = (inventoryItem) => {
-        if (inventoryItem.type === "clothing") {
-        returnValue = true
-    }
-    else returnValue = false
-    return returnValue
-}
-
-const isGear = (inventoryItem) => {
-    if (inventoryItem.type === "surfboard") {
-        returnValue = true
-    }
-    else returnValue = false
-    return returnValue
-}
-
-const printMessage = (message) => {
-    if (message != "") {
-        console.log(message)
-    } 
-}
-
-const convertDataForAccounting = (product) => {
-    const allUpperCase = `${product.description.toUpperCase()} - ${product.type.toUpperCase()} - ${product.price}`
-    return allUpperCase
-}
-
-const calculateAveragePrice = (inventory) => {
-    let allPrices = 0
-    for (product of inventory) {
-        allPrices += product.price
-    }
-    const averagePrice = allPrices / inventory.length
-    return averagePrice
-}
+const {
+    isBargain, isClothing, isGear,
+    isSurfboard, convertDataForAccounting,
+    calculateAveragePrice
+} = require("./functions.js")
 
 for (const inventoryItem of inventory) {
     if (isClothing(inventoryItem)) {
@@ -66,7 +20,9 @@ for (const inventoryItem of inventory) {
         message = `${inventoryItem.description} is a surfing gear product`
     }
     else message = ""
-    printMessage(message)
+    if (message != "") {
+        console.log(message)
+    }
 }
 
 console.log("\n------------------------\n")
